@@ -7,8 +7,14 @@ export type NoteList = {
     id: string;
     title: string;
     text: string;
-    tags: string[];
+    tags: TagsType[];
 }
+
+export type TagsType={
+    id: string
+    tag: string
+}
+
 
 
 export type AppState = {
@@ -23,14 +29,20 @@ export const App = () => {
                 id: v1(),
                 title: "New title1",
                 text: "Привет#Петя как #milk#and your     #mom    ",
-                tags:  ['']
+                tags:  [
+                    {
+                    id: v1(),
+                    tag:''
+                }
+                ]
             },
-            {
-                id: v1(),
-                title: "New title2",
-                text: "New post1",
-                tags:  ['']
-            }]
+            // {
+            //     id: v1(),
+            //     title: "New title2",
+            //     text: "New post1",
+            //     tags:  ['']
+            // }
+            ]
     }
     const [state, setState] = useState<AppState>(initialAppState)
 
@@ -65,10 +77,11 @@ export const App = () => {
         setState({...state, notes: state.notes.map(el=>el.id===id ? {...el, text: newTitle} :el)})
     }
 
-    const tagChanger = (id: string, tag: string, text: string) => {
-        const str = text.split(' ').map(el=>el[0]===tag ? el : '')
+    const tagChanger = (idTag: string, hashTag: string, text: string) => {
+        const str = text.split(' ').map(el=>el[0]===hashTag ? el : '')
         const res = str.filter(f=>f!=='').join(' ').replace(/[\s.,/%]/g, '')
-        setState({...state, notes: state.notes.map(el=>el.id===id ? {...el, tags: [res]} : el)})
+        // setState({...state, notes: state.notes.map(el=>el.id===idNote ? {...el, tags: {...el.tags.map(ta=>ta.id===idTag ? {...ta, tag: `${res}`} :ta)}} : el)})
+        setState({...state, notes: state.notes.map(el=>({...el, tags: el.tags.map(f=>f.id===idTag ? {...el, tag: res} : f)}))           })
     }
 
     return (
@@ -78,7 +91,7 @@ export const App = () => {
                 return (
                     <Notes
                     key={el.id}
-                    id={el.id}
+                    idNote={el.id}
                     title={el.title}
                     text={el.text}
                     tags={el.tags}
