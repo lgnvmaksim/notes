@@ -10,13 +10,12 @@ type NotesType = {
     onSaveNote: (note: NoteList)=>void
     changeNoteTitle:(id: string, newTitle: string)=>void
     changeNoteText:(id: string, newTitle: string)=>void
-    tagChanger:(idTag: string, hashTag: string, text: string)=>void
-    // idTag: string
+    tagChanger:( hashTag: string, text: string)=>void
 
 }
 
-export const Notes = ({title, text, tags, onSaveNote, idNote, changeNoteTitle, changeNoteText,tagChanger}: NotesType) => {
 
+export const Notes = ({title, text, tags, onSaveNote, idNote, changeNoteTitle, changeNoteText,tagChanger}: NotesType) => {
 
 
     return (
@@ -24,18 +23,14 @@ export const Notes = ({title, text, tags, onSaveNote, idNote, changeNoteTitle, c
 
          <h2> <TextChanger title={title} changeTitle={(newTitle:string)=>{changeNoteTitle(idNote, newTitle)}}/></h2>
             <span><TextChanger title={text} changeTitle={(newText:string)=>{changeNoteText(idNote, newText)}}/></span>
-
+            <div>
+                <button onClick={()=>tagChanger( '#', text)}>Add tags</button>
+            </div>
             <ul>
-
-                {tags.map((el)=>{
-                    const tagsHandler = (idTag: string) => {
-                        tagChanger(idTag, '#', text)
-                    }
-                    return <div key={el.id}>
-                    <button onClick={()=>tagsHandler(el.id)}>+</button>
-                        <li>{el.tag}</li>
-                    </div>
-
+                {tags.map(el=>{
+                    return <li key={el.id}>
+                        {el.tag}
+                    </li>
                 })}
             </ul>
 
