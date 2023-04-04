@@ -1,13 +1,14 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import s from './../styles/inputStyles.module.scss'
 
 type TextChangerType = {
     title: string
     changeTitle: (newTitle: string) => void
     onSaveNote: () => void
+    tagChanger?:()=>void
 }
 
-export const TextChanger = ({title, changeTitle, onSaveNote}: TextChangerType) => {
+export const TextChanger = ({title, changeTitle, onSaveNote,tagChanger}: TextChangerType) => {
     const [text, setText] = useState(title)
     const [open, setOpen] = useState(false)
 
@@ -19,8 +20,13 @@ export const TextChanger = ({title, changeTitle, onSaveNote}: TextChangerType) =
             setText(title)
         }
         setOpen(!open)
-
     }
+
+    useEffect(()=>{
+        if (tagChanger){
+            tagChanger()
+        }
+    },[open])
 
     const onChangeTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.currentTarget.value)
