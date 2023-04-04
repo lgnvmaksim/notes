@@ -18,7 +18,6 @@ export const TextChanger = ({title, changeTitle, onSaveNote}: TextChangerType) =
         } else {
             setText(title)
         }
-
         setOpen(!open)
 
     }

@@ -35,6 +35,12 @@ export const App = () => {
         localStorage.setItem("notes", JSON.stringify(state.notes));
     };
 
+    useEffect(()=>{
+        if (state.notes.length!==0){
+            onSaveNote()
+        }
+    })
+
 
     const changeNoteTitle = (id: string, newTitle: string) => {
         setState({...state, notes: state.notes.map(el => el.commonId === id ? {...el, title: newTitle} : el)})
@@ -66,7 +72,7 @@ export const App = () => {
         const newNote = {
             commonId: generateRandomId(),
             title: newTitle,
-            text: "You can change your #text",
+            text: "You can change your #text here" ,
             tags: [
                 {
                     commonId: generateRandomId(),

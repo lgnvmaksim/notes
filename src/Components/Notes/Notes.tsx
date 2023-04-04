@@ -36,29 +36,32 @@ export const Notes = ({
     return <div className={s.body}>
 
         <div className={s.notesBlock}>
-            <h2><TextChanger title={title} onSaveNote={() => onSaveNote()}
-                             changeTitle={(newTitle: string) => {
-                                 changeNoteTitle(commonId, newTitle)
-                             }}/>
+            <h2 className={s.title}><TextChanger title={title} onSaveNote={() => onSaveNote()}
+                                                 changeTitle={(newTitle: string) => {
+                                                     changeNoteTitle(commonId, newTitle)
+                                                 }}/>
                 <button className={c.button} onClick={() => removeButtonHandler(commonId)}>x</button>
             </h2>
-            <span><TextChanger title={text} onSaveNote={() => onSaveNote()}
-                               changeTitle={(newText: string) => {
-                                   changeNoteText(commonId, newText)
-                               }}/></span>
-            <div>
+            <span>
+                <TextChanger title={text} onSaveNote={() => onSaveNote()}
+                             changeTitle={(newText: string) => {
+                                 changeNoteText(commonId, newText)
+                             }}/>
+            </span>
+            <div className={s.button}>
                 <button
                     className={c.button}
                     onClick={() => {
-                    onSaveNote()
-                    tagChanger(commonId, '#', text)
-                }}>Add tags
+                        onSaveNote()
+                        tagChanger(commonId, '#', text)
+                    }}>Add tags
                 </button>
             </div>
+
             <ul className={s.tag}>
                 Tags:
                 {tags.map(el => {
-                    return <li className={s.tagsStyle}  key={el.commonId}>
+                    return <li className={s.tagsStyle} key={el.commonId}>
                         {el.tag}
                     </li>
                 })}
