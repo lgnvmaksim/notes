@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+
+.common {
+  min-height: 100vh;
+  background-color: $bgColor;
+}
+
+.notesCommon{
+  display: flex;
+  flex-wrap: wrap;
+}

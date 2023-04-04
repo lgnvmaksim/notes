@@ -1,4 +1,6 @@
 import {ChangeEvent, useState, KeyboardEvent} from "react";
+import s from '../styles/inputStyles.module.scss';
+import c from '../styles/buttonStyles.module.scss'
 
 type InputType = {
     callback: (text: string) => void
@@ -28,12 +30,13 @@ export const UniversalInput = (props: InputType) => {
     }
     return <div>
         <input
+            className={s.input}
             value={text}
     onChange={onChangeTextHandler}
     onKeyDown={onKeyDownHandler}
     // className={error ? a.error : undefined}
     />
-    <button onClick={addTaskButtonHandler} >+</button>
+    <button onClick={addTaskButtonHandler} className={c.button} >+</button>
     {/*{error && <div className={a.errorMessage}>{error}</div>}*/}
         </div>
     }

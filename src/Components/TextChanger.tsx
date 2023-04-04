@@ -1,16 +1,13 @@
 import {ChangeEvent, useState} from "react";
-import {NoteList} from "../App";
+import s from './../styles/inputStyles.module.scss'
 
 type TextChangerType = {
     title: string
     changeTitle: (newTitle: string) => void
-    style?: {}
-    // tagChanger?:(idTag: string, hashTag: string, text: string)=>void
-    // tagsId?: string
     onSaveNote: () => void
 }
 
-export const TextChanger = ({title, changeTitle, style, onSaveNote}: TextChangerType) => {
+export const TextChanger = ({title, changeTitle, onSaveNote}: TextChangerType) => {
     const [text, setText] = useState(title)
     const [open, setOpen] = useState(false)
 
@@ -32,7 +29,7 @@ export const TextChanger = ({title, changeTitle, style, onSaveNote}: TextChanger
 
     return open
         ?
-        <input onBlur={openMode} onChange={onChangeTextHandler} style={style} autoFocus value={text} onKeyDown={(e) => {
+        <input className={s.input} onBlur={openMode} onChange={onChangeTextHandler} autoFocus value={text} onKeyDown={(e) => {
             if (e.key === 'Enter') {
                 openMode()
             }

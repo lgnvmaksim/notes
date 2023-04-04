@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.body {
+  display: flex;
+
+  .notesBlock {
+    border: 1px solid black;
+    padding: 15px;
+    margin: 15px;
+    box-shadow: 0 1px 10px $primaryColor;
+    background-color: $bgColor2;
+
+    .tag {
+     font-size: 30px;
+    margin: 10px;
+      border: 1px solid;
+      box-shadow: 0 1px 10px $primaryColor;
+      background-color: $bgColor2;
+
+      .tagsStyle {
+        @include text($TitleFontFamily, 20px, 1.2);
+        list-style-type: none;
+      }
+
+      .tagsStyle:hover {
+        color: #ffffff;
+      }
+    }
+
+  }
+
+}
+
+
+
+
+

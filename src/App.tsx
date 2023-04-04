@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Notes} from "./Notes";
-import {UniversalInput} from "./Components/InputSuper";
+import {Notes} from "./Components/Notes/Notes";
+import {Header} from "./Components/Header/Header";
+import s from './App.module.scss'
 
 
 export type NoteList = {
@@ -24,39 +25,15 @@ export type AppState = {
 export const App = () => {
 
     const initialAppState: AppState = {
-        notes: [
-            {
-                commonId: '1',
-                title: "New title1",
-                text: "What need to buy: #orange, #milk, #bread",
-                tags: [
-                    {
-                        commonId: '1',
-                        tag: ''
-                    }
-                ]
-            }
-        ]
+        notes: []
     }
     const [state, setState] = useState<AppState>(initialAppState)
 
 
 
-    const onSaveNote = (note: NoteList) => {
-        const index = state.notes.findIndex((n) => n.commonId === note.commonId);
-        if (index >= 0) {
-            state.notes[index] = note;
-            setState({notes: state.notes});
-        } else {
-            const notes = [...state.notes, note];
-            setState({notes});
-        }
-        // localStorage.setItem("notes", JSON.stringify(state.notes));
+    const onSaveNote = () => {
+        localStorage.setItem("notes", JSON.stringify(state.notes));
     };
-
-    useEffect(()=>{
-        localStorage.setItem("notes", JSON.stringify(state.notes))
-    },[state])
 
 
     const changeNoteTitle = (id: string, newTitle: string) => {
@@ -117,26 +94,30 @@ export const App = () => {
     }, []);
 
     return (
-        <div style={{display: 'flex', margin: '15px'}}>
-            <UniversalInput callback={addNewNote}/>
-            {state.notes.map((el) => {
+        <div  className={s.common}>
+            <Header addNewNote={addNewNote}/>
 
-                return (
-                    <Notes
-                        key={el.commonId}
-                        commonId={el.commonId}
-                        title={el.title}
-                        text={el.text}
-                        tags={el.tags}
-                        tagChanger={tagChanger}
-                        onSaveNote={onSaveNote}
-                        changeNoteTitle={changeNoteTitle}
-                        changeNoteText={changeNoteText}
-                        textWithTags={textWithTags}
-                        removeButtonHandler={removeButtonHandler}
-                    />
-                )
-            })}
+            <div className={s.notesCommon}>
+                {state.notes.map((el) => {
+
+                    return (
+                        <Notes
+                            key={el.commonId}
+                            commonId={el.commonId}
+                            title={el.title}
+                            text={el.text}
+                            tags={el.tags}
+                            tagChanger={tagChanger}
+                            onSaveNote={onSaveNote}
+                            changeNoteTitle={changeNoteTitle}
+                            changeNoteText={changeNoteText}
+                            textWithTags={textWithTags}
+                            removeButtonHandler={removeButtonHandler}
+                        />
+                    )
+                })}
+            </div>
+
         </div>
     );
 }
