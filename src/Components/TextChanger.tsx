@@ -23,10 +23,10 @@ export const TextChanger = ({title, changeTitle, onSaveNote,tagChanger}: TextCha
     }
 
     useEffect(()=>{
-        if (tagChanger){
+        if (tagChanger!==undefined){
             tagChanger()
         }
-    },[tagChanger])
+    },[open])
 
     const onChangeTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.currentTarget.value)

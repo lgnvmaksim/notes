@@ -39,7 +39,7 @@ export const App = () => {
         if (state.notes.length!==0){
             onSaveNote()
         }
-    })
+    }, [initialAppState])
 
 
     const changeNoteTitle = (id: string, newTitle: string) => {
