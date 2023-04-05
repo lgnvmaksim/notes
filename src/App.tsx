@@ -72,7 +72,7 @@ export const App = () => {
         const newNote = {
             commonId: generateRandomId(),
             title: newTitle,
-            text: "You can write text, add a #hash and see your #tag" ,
+            text: "You can write text, add a #hash and see your #tag",
             tags: [
                 {
                     commonId: generateRandomId(),
